@@ -59,11 +59,11 @@ Das bereitgestellte Material dient ausschließlich Forschungszwecken und soll ni
 ### Schritte zur Ausführung  
 1. Repository klonen
 2. Zwei Bash-Konsolen starten
-3. Mit der ersten Konsole in den Ordner "webseite" wechseln und Frontend starten:
+3. Mit der ersten Konsole in den Ordner "Puppeteer/webseite" wechseln und Frontend starten:
    ```bash
    node server.js
    ```  
-4. Mit der zweiten Konsole in den Ordner "websocket" wechseln und die URLs in den Dateien im Subordner "skripte" anpassen, da diese anonymisiert wurden
+4. Mit der zweiten Konsole in den Ordner "Puppeteer/websocket" wechseln und die URLs in den Dateien im Subordner "skripte" anpassen, da diese anonymisiert wurden
 5. Aktivieren Sie das gewünschte Phislet:  
    ```bash
    node websocket.js
