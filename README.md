@@ -20,7 +20,7 @@ Das bereitgestellte Material dient ausschließlich Forschungszwecken und soll ni
 
 ## 5. Anleitung zur Verwendung der Evilginx Phishlets  
 
-### Voraussetzungen Evilginx 
+### Voraussetzungen 
 - Installation von Evilginx2 (https://github.com/kgretzky/evilginx2)
 
 ### Schritte zur Ausführung  
@@ -52,14 +52,14 @@ Das bereitgestellte Material dient ausschließlich Forschungszwecken und soll ni
 
 ## 6. Anleitung zur Verwendung des Puppeteer-Codes  
 
-### Voraussetzungen Evilginx 
+### Voraussetzungen 
 - Installation von NodeJS (v18.20.8)
 - Installation von Puppeteer (24.9.0)
 
 ### Schritte zur Ausführung  
 1. Repository klonen
 2. Zwei Bash-Konsolen starten
-3. Mit der ersten Konsole in den Ordner "Puppeteer/webseite" wechseln und Frontend starten:
+3. Mit der ersten Konsole in den Ordner "Puppeteer/webseite" wechseln, in den HTMl-Dateien die IP des Websockets hinterlegen und Frontend starten:
    ```bash
    node server.js
    ```  
