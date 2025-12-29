@@ -3,16 +3,16 @@
 # README – Anhang zur Masterarbeit  
 **Thema:** Phishing von MFA-gesicherten Accounts und mögliche Gegenmaßnahmen
 
-**Hochschule** Westfälische Hochschule Gelsenkirchen
+**Hochschule:** Westfälische Hochschule Gelsenkirchen
 
-**Studienfach** Master Internet-Sicherheit
+**Studienfach:** Master Internet-Sicherheit
 
 ## 1. Überblick  
 Dieser Anhang enthält den Quellcode des selbstentwickelten Tools sowie die zugehörigen Phishlets für Evilginx, die im Rahmen der Masterarbeit erstellt wurden. Ziel der Arbeit ist es, Schwachstellen bei Multi-Faktor-Authentifizierung (MFA) durch Phishing-Angriffe zu analysieren und darauf basierende Gegenmaßnahmen vorzuschlagen.
 
 ## 2. Inhalt  
 - **Evilginx:** Phishlets von Evilginx. Das sind Konfigurationsdateien, die speziell für die Durchführung der demonstrierten Angriffe verwendet werden.
-- **Puppeteer** Implementierung des Phishing-Tools zur Simulation von Angriffen auf MFA-gesicherte Accounts.
+- **Puppeteer:** Implementierung des Phishing-Tools zur Simulation von Angriffen auf MFA-gesicherte Accounts.
   
 ## 3. Disclaimer Unternehmen
 Diese Arbeit wurde in Zusammenarbeit mit einem Unternehmen erstellt. Aufgrund des securityrelevanten Themas wird weder das Unternehmen erwähnt, noch werden Rückschlüsse zu dem Unternehmen gegeben. Aus diesem Grund sind im Quellcode und den Konfigurationsdateien alle Hinweise, wie die URLs, auf das Unternehmen entfernt. 
@@ -33,7 +33,7 @@ Das bereitgestellte Material dient ausschließlich Forschungszwecken und soll ni
    ```bash
    sudo ./evilgingx -developer
    ```  
-5. Aktivieren des gewünschten Phislet als Beispiel:  
+5. Aktivieren des gewünschten Phishlet als Beispiel:  
    ```bash
    phishlets enable entraID
    ```
@@ -66,7 +66,7 @@ Das bereitgestellte Material dient ausschließlich Forschungszwecken und soll ni
    node server.js
    ```  
 4. Mit der zweiten Konsole in den Ordner "Puppeteer/websocket" wechseln und die URLs in den Dateien im Subordner "skripte" anpassen, da diese anonymisiert wurden
-5. Aktivieren Sie das gewünschte Phislet:  
+5. Aktivieren Sie das gewünschte Phishlet:  
    ```bash
    node websocket.js
    ```  
