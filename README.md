@@ -2,7 +2,9 @@
 
 # README – Anhang zur Masterarbeit  
 **Thema:** Phishing von MFA-gesicherten Accounts und mögliche Gegenmaßnahmen
+
 **Hochschule** Westfälische Hochschule Gelsenkirchen
+
 **Studienfach** Master Internet-Sicherheit
 
 ## 1. Überblick  
