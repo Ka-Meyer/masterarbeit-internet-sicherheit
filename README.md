@@ -6,7 +6,7 @@
 **Studienfach** Master Internet-Sicherheit
 
 ## 1. Überblick  
-Dieser Anhang enthält den Quellcode des selbstentwickelten Tools sowie die zugehörigen Phislets für Evilginx, die im Rahmen der Masterarbeit erstellt wurden. Ziel der Arbeit ist es, Schwachstellen bei Multi-Faktor-Authentifizierung (MFA) durch Phishing-Angriffe zu analysieren und darauf basierende Gegenmaßnahmen vorzuschlagen.
+Dieser Anhang enthält den Quellcode des selbstentwickelten Tools sowie die zugehörigen Phishlets für Evilginx, die im Rahmen der Masterarbeit erstellt wurden. Ziel der Arbeit ist es, Schwachstellen bei Multi-Faktor-Authentifizierung (MFA) durch Phishing-Angriffe zu analysieren und darauf basierende Gegenmaßnahmen vorzuschlagen.
 
 ## 2. Inhalt  
 - **Evilginx:** Phishlets von Evilginx. Das sind Konfigurationsdateien, die speziell für die Durchführung der demonstrierten Angriffe verwendet werden.
